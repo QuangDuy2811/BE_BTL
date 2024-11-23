@@ -1,4 +1,4 @@
-package com.example.btl.cart;
+package com.example.btl.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
