@@ -1,4 +1,4 @@
-package com.example.btl.cart;
+package com.example.btl.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
