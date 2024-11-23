@@ -1,4 +1,4 @@
-package com.example.btl.cart;
+package com.example.btl.model;
 
 import jakarta.persistence.*;
 import java.util.List;
