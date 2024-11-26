@@ -86,9 +86,9 @@ DROP TABLE IF EXISTS `danhmuc`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `danhmuc` (
   `madanhmuc` int NOT NULL AUTO_INCREMENT,
-  `tendanhmuc` int NOT NULL,
+  `tendanhmuc` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`madanhmuc`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -97,6 +97,7 @@ CREATE TABLE `danhmuc` (
 
 LOCK TABLES `danhmuc` WRITE;
 /*!40000 ALTER TABLE `danhmuc` DISABLE KEYS */;
+INSERT INTO `danhmuc` VALUES (1,'Giày thể thao'),(2,'Quần áo thể thao'),(3,'Phụ kiện thể thao'),(4,'Dụng cụ tập gym');
 /*!40000 ALTER TABLE `danhmuc` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -199,6 +200,7 @@ CREATE TABLE `khachhang` (
 
 LOCK TABLES `khachhang` WRITE;
 /*!40000 ALTER TABLE `khachhang` DISABLE KEYS */;
+INSERT INTO `khachhang` VALUES (12345,'Hong Kong'),(12346,'456 Le Loi'),(12347,'789 Tran Hung Dao');
 /*!40000 ALTER TABLE `khachhang` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -211,12 +213,12 @@ DROP TABLE IF EXISTS `loai`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `loai` (
   `maloai` int NOT NULL AUTO_INCREMENT,
-  `tenloai` int NOT NULL,
+  `tenloai` varchar(255) DEFAULT NULL,
   `DanhMucmadanhmuc` int NOT NULL,
   PRIMARY KEY (`maloai`),
   KEY `FKLoai988676` (`DanhMucmadanhmuc`),
   CONSTRAINT `FKLoai988676` FOREIGN KEY (`DanhMucmadanhmuc`) REFERENCES `danhmuc` (`madanhmuc`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -225,6 +227,7 @@ CREATE TABLE `loai` (
 
 LOCK TABLES `loai` WRITE;
 /*!40000 ALTER TABLE `loai` DISABLE KEYS */;
+INSERT INTO `loai` VALUES (1,'Giày chạy bộ',1),(2,'Giày đá bóng',1),(3,'Áo bóng đá',2),(4,'Quần gym',2),(5,'Găng tay thể thao',3),(6,'Dây nhảy',4);
 /*!40000 ALTER TABLE `loai` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -262,7 +265,7 @@ DROP TABLE IF EXISTS `nhanvien`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `nhanvien` (
-  `viTri` varchar(255) NOT NULL,
+  `vitri` varchar(255) DEFAULT NULL,
   `Thanhvienmathanhvien` int NOT NULL,
   KEY `FKNhanvien525866` (`Thanhvienmathanhvien`),
   CONSTRAINT `FKNhanvien525866` FOREIGN KEY (`Thanhvienmathanhvien`) REFERENCES `thanhvien` (`mathanhvien`)
@@ -289,10 +292,10 @@ CREATE TABLE `sanpham` (
   `masanpham` int NOT NULL AUTO_INCREMENT,
   `tensanpham` varchar(255) NOT NULL,
   `mota` varchar(255) NOT NULL,
-  `gia` varchar(255) NOT NULL,
+  `gia` int DEFAULT NULL,
   `ngaysanxuat` date NOT NULL,
-  `khuyenMai` varchar(255) NOT NULL,
-  `soluong` varchar(255) NOT NULL,
+  `khuyenmai` int DEFAULT NULL,
+  `soluong` int DEFAULT NULL,
   `Nhacungcapmanhacungcap` int NOT NULL,
   `Loaimaloai` int NOT NULL,
   PRIMARY KEY (`masanpham`),
@@ -323,10 +326,10 @@ CREATE TABLE `thanhvien` (
   `mathanhvien` int NOT NULL AUTO_INCREMENT,
   `ten` varchar(255) NOT NULL,
   `ngaysinh` date NOT NULL,
-  `taiKhoan` varchar(255) NOT NULL,
-  `matKhau` varchar(255) NOT NULL,
+  `taikhoan` varchar(255) DEFAULT NULL,
+  `matkhau` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`mathanhvien`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=12348 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -335,6 +338,7 @@ CREATE TABLE `thanhvien` (
 
 LOCK TABLES `thanhvien` WRITE;
 /*!40000 ALTER TABLE `thanhvien` DISABLE KEYS */;
+INSERT INTO `thanhvien` VALUES (12345,'Nguyen Van A','1994-06-18','nguyenvana','matkhau123'),(12346,'Nguyen Van B','1995-06-01','nguyenvanb','password123'),(12347,'Nguyen Van C','1995-06-01','nguyenvanc','password123');
 /*!40000 ALTER TABLE `thanhvien` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -347,7 +351,7 @@ DROP TABLE IF EXISTS `thongso`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `thongso` (
   `mathongso` int NOT NULL AUTO_INCREMENT,
-  `tenloaithongso` int NOT NULL,
+  `tenloaithongso` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`mathongso`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -435,6 +439,37 @@ LOCK TABLES `tksanpham` WRITE;
 /*!40000 ALTER TABLE `tksanpham` DISABLE KEYS */;
 /*!40000 ALTER TABLE `tksanpham` ENABLE KEYS */;
 UNLOCK TABLES;
+
+--
+-- Table structure for table `users`
+--
+
+DROP TABLE IF EXISTS `users`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `users` (
+  `mathanhvien` int NOT NULL AUTO_INCREMENT,
+  `matkhau` varchar(255) NOT NULL,
+  `ngaysinh` date NOT NULL,
+  `taikhoan` varchar(255) NOT NULL,
+  `ten` varchar(255) NOT NULL,
+  PRIMARY KEY (`mathanhvien`),
+  UNIQUE KEY `UKtft53blenbrxsijgrqax38p2g` (`taikhoan`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `users`
+--
+
+LOCK TABLES `users` WRITE;
+/*!40000 ALTER TABLE `users` DISABLE KEYS */;
+/*!40000 ALTER TABLE `users` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Dumping events for database 'btl'
+--
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -445,4 +480,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-11-14 19:28:15
+-- Dump completed on 2024-11-26 20:07:01
